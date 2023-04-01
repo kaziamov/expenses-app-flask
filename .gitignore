@@ -1,0 +1,11 @@
+*cache*
+.idea
+.vscode
+/dist
+.venv
+/venv
+.vim
+*coverage*
+*Zone.Identifier*
+.env
+test_db.sql
