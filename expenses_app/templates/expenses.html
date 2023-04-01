@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block table %}
+  {% include 'add_new_expense_form.html' %}
+  <h1>{{ title }}</h1>
+
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <th>Наименование транзакции</th>
+      <th>Сумма</th>
+      <th>Валюта</th>
+      <th>Категория</th>
+      <th>Дата транзакции</th>
+    </tr>
+    {% for url in urls %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+{% endblock %}
