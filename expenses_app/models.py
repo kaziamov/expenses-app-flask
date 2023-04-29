@@ -41,7 +41,7 @@ def add_new_expence(conn, data):
 
 def get_data(conn, table):
     with conn.cursor() as cursor:
-        cursor.execute("""SELECT * FROM {table}""")
+        cursor.execute(f"""SELECT * FROM {table}""")
         return cursor.fetchall()
 
 

@@ -17,23 +17,28 @@ app.url_map.strict_slashes = False
 app.permanent_session_lifetime = timedelta(hours=24)
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/', methods=["GET"])
 def root():
     return redirect(url_for('expenses'))
 
 
-@app.route('/expenses', methods=["GET", "POST"])
+@app.route('/add_new_expense', methods=["POST"])
+def add_new_expense():
+    with get_connection() as conn:
+        form_values = request.form.to_dict()
+        data = (form_values['name'],
+                form_values["sum"],
+                form_values["date"],
+                form_values['currency'],
+                form_values["category"],
+                )
+        add_new_expence(conn, data=data)
+    return redirect(url_for('expenses'))
+
+
+@app.route('/expenses', methods=["GET"])
 def expenses():
     with get_connection() as conn:
-        if request.method == 'POST':
-            form_values = request.form.to_dict()
-            data = (form_values['name'],
-                    form_values["sum"],
-                    form_values["date"],
-                    form_values['currency'],
-                    form_values["category"],
-                    )
-            add_new_expence(conn, data=data)
         categories = get_categories(conn)
         currencies = get_currencies(conn)
         expenses = get_expenses(conn)
@@ -43,30 +48,38 @@ def expenses():
                            currencies=currencies)
 
 
-@app.route('/categories', methods=["GET", "POST"])
-def categories():
-    new_category = ''
+@app.route('/add_new_category', methods=["POST"])
+def add_new_category():
     with get_connection() as conn:
-        if request.method == 'POST':
-            form_values = request.form.to_dict()
-            new_category = form_values['new_category'].strip()
-            add_category(conn, new_category)
-            flash('Категория добавлена', 'success')
+        form_values = request.form.to_dict()
+        new_category = form_values['new_category'].strip()
+        add_category(conn, new_category)
+        flash('Категория добавлена', 'success')
+    return redirect(url_for('categories', new_category=new_category))
+
+
+@app.route('/categories', methods=["GET"])
+def categories(new_category=''):
+    with get_connection() as conn:
         categories = get_categories(conn)
     return render_template("categories.html",
                            categories=categories,
                            new_category=new_category)
 
 
-@app.route('/currencies', methods=["GET", "POST"])
-def currencies():
-    new_currency = ''
+@app.route('/add_new_currency', methods=["POST"])
+def add_new_currency():
     with get_connection() as conn:
-        if request.method == 'POST':
-            form_values = request.form.to_dict()
-            new_currency = form_values['new_currency'].strip()
-            add_currency(conn, new_currency)
-            flash('Валюта добавлена', 'success')
+        form_values = request.form.to_dict()
+        new_currency = form_values['new_currency'].strip()
+        add_currency(conn, new_currency)
+        flash('Валюта добавлена', 'success')
+    return redirect(url_for('categories', new_currency=new_currency))
+
+
+@app.route('/currencies', methods=["GET"])
+def currencies(new_currency=''):
+    with get_connection() as conn:
         currencies = get_currencies(conn)
     return render_template("currencies.html",
                            currencies=currencies,
