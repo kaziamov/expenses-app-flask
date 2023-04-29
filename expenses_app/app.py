@@ -37,7 +37,10 @@ def expenses():
         categories = get_categories(conn)
         currencies = get_currencies(conn)
         expenses = get_expenses(conn)
-    return render_template('expenses.html', expenses=expenses, categories=categories, currencies=currencies)
+    return render_template('expenses.html',
+                           expenses=expenses,
+                           categories=categories,
+                           currencies=currencies)
 
 
 @app.route('/categories', methods=["GET", "POST"])
