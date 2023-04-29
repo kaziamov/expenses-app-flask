@@ -23,14 +23,14 @@ def _create_tables(conn):
             created_at DATE );""")
 
 
-def create_category(conn, data):
+def add_category(conn, data):
     with conn.cursor() as cursor:
         cursor.execute("""INSERT INTO categories (name) VALUES (%s) ;""", (data, ))
 
 
-def create_currency(conn, name):
+def add_currency(conn, name):
     with conn.cursor() as cursor:
-        cursor.execute("""INSERT INTO currencies (name) VALUES (%s) ;""", (name, now()))
+        cursor.execute("""INSERT INTO currencies (name) VALUES (%s) ;""", (name,))
 
 
 def add_new_expence(conn, data):
@@ -41,4 +41,10 @@ def add_new_expence(conn, data):
 def get_categories(conn):
     with conn.cursor() as cursor:
         cursor.execute("""SELECT * FROM categories""")
+        return cursor.fetchall()
+
+
+def get_currencies(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("""SELECT * FROM currencies""")
         return cursor.fetchall()

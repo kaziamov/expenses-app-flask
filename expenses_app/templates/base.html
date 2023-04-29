@@ -13,9 +13,6 @@
       {% include 'blocks/navigation.html' %}
     </header>
 
-    {% block form_add %}
-    {% endblock form_add %}
-
     {% with messages = get_flashed_messages(with_categories = true) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -23,6 +20,11 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+
+
+    {% block form_add %}
+    {% endblock %}
+
 
     <main class="flex-grow-1">
       <div class="container-lg mt-3">

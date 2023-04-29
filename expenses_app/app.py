@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, flash, redirect, url_for
 
-from expenses_app.models import create_currency, create_category, add_new_expence, get_categories
+from expenses_app.models import add_currency, add_category, add_new_expence, get_categories, get_currencies
 from expenses_app.db_connect import get_connection
 
 
@@ -39,21 +39,22 @@ def categories():
         if request.method == 'POST':
             form_values = request.form.to_dict()
             new_category = form_values['new_category'].strip()
-            create_category(conn, new_category)
+            add_category(conn, new_category)
             flash('Категория добавлена', 'success')
         categories = get_categories(conn)
     return render_template("categories.html", categories=categories, new_category=new_category)
 
-@app.route('/currency', methods=["GET", "POST"])
-def currency():
+
+@app.route('/currencies', methods=["GET", "POST"])
+def currencies():
     new_currency = ''
     with get_connection() as conn:
         if request.method == 'POST':
             form_values = request.form.to_dict()
             new_currency = form_values['new_currency'].strip()
-            create_category(conn, new_currency)
-            flash('Категория добавлена', 'success')
-        currencies = get_categories(conn)
+            add_currency(conn, new_currency)
+            flash('Валюта добавлена', 'success')
+        currencies = get_currencies(conn)
     return render_template("currencies.html", currencies=currencies, new_currency=new_currency)
 
 
