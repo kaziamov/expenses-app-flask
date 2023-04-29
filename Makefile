@@ -33,4 +33,7 @@ server:
 #  PROD
 PORT ?= 8000
 start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) expenses_app:app
+	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) wb:hello_world
+
+py:
+	poetry run python
