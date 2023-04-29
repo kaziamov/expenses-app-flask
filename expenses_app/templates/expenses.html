@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-{% block content %}
-
+{% block form_add %}
+  {% include 'forms/add_new_expense.html' %}
 {% endblock %}
 
 {% block table %}
-  {% include 'blocks/add_expense_form.html' %}
   <h1>{{ title }}</h1>
 
   <tbody>

@@ -3,7 +3,7 @@ import datetime
 now = datetime.datetime.now
 
 
-def __create_tables(conn):
+def _create_tables(conn):
     with conn.cursor() as cursor:
         cursor.execute("""CREATE TABLE categories (
             id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -25,7 +25,7 @@ def __create_tables(conn):
 
 def create_category(conn, data):
     with conn.cursor() as cursor:
-        cursor.execute("""INSERT INTO categories (name) VALUES (%s) ;""", data)
+        cursor.execute("""INSERT INTO categories (name) VALUES (%s) ;""", (data, ))
 
 
 def create_currency(conn, name):
@@ -37,3 +37,8 @@ def add_new_expence(conn, data):
     with conn.cursor() as cursor:
         cursor.execute("""INSERT INTO expenses (name, sum, date, currency, category, is_income)
                        VALUES (%s, %s, %s, %s, %s, %s) ;""", data)
+
+def get_categories(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("""SELECT * FROM categories""")
+        return cursor.fetchall()

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
-    <form action="/" method="post" class="d-flex justify-content-center" required>
+    <form action="/expenses" method="post" class="d-flex justify-content-center" required>
       <label for="name">Наименование транзакции</label>
       <input type="text" name="name" placeholder="" value="{{ url }}" class="form-control form-control-lg" />
       <label for="sum">Сумма</label>
@@ -11,7 +11,7 @@
       <input type="text" name="category" placeholder="" value="{{ category }}" class="form-control form-control-lg" />
       <label for="date">Дата транзакции</label>
       <input type="date" name="date" placeholder="" value="{{ date }}" class="form-control form-control-lg" />
-      <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Проверить" />
+      <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Добавить" />
     </form>
   </div>
 </div>

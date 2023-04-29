@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block form_add %}
-    {% include 'forms/add_new_category.html' %}
+    {% include 'forms/add_new_currency.html' %}
 {% endblock %}
 
 {% block content %}
@@ -9,12 +9,12 @@
     <tbody>
       <tr>
         <th>ID</th>
-        <th>Имя</th>
+        <th>Название</th>
       </tr>
-      {% for category in categories %}
+      {% for currency in currencies %}
       <tr>
-        <td> {{ category[0] }}</td>
-        <td> {{ category[1] }}</td>
+        <td> {{ currency[0] }}</td>
+        <td> {{ currency[1] }}</td>
       </tr>
       {% endfor %}
     </tbody>
