@@ -39,19 +39,19 @@ def add_new_expence(conn, data):
                        VALUES (%s, %s, %s, %s, %s) ;""", data)
 
 
-def get_categories(conn):
+def get_data(conn, table):
     with conn.cursor() as cursor:
-        cursor.execute("""SELECT * FROM categories""")
+        cursor.execute("""SELECT * FROM {table}""")
         return cursor.fetchall()
+
+
+def get_categories(conn):
+    return get_data(conn, 'categories')
 
 
 def get_currencies(conn):
-    with conn.cursor() as cursor:
-        cursor.execute("""SELECT * FROM currencies""")
-        return cursor.fetchall()
+    return get_data(conn, 'currencies')
 
 
 def get_expenses(conn):
-    with conn.cursor() as cursor:
-        cursor.execute("""SELECT * FROM expenses""")
-        return cursor.fetchall()
+    return get_data(conn, 'expenses')
