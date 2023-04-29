@@ -6,7 +6,8 @@ from expenses_app.models import (add_currency,
                                  add_category,
                                  add_new_expence,
                                  get_categories,
-                                 get_currencies)
+                                 get_currencies,
+                                 get_expenses)
 from expenses_app.db_connect import get_connection
 
 
@@ -23,17 +24,20 @@ def root():
 
 @app.route('/expenses', methods=["GET", "POST"])
 def expenses():
-    if request.method == 'POST':
-        form_values = request.form.to_dict()
-        data = (form_values['name'],
-                form_values["sum"],
-                form_values["date"],
-                form_values['currency'],
-                form_values["category"],
-                form_values['is_income'])
-        with get_connection() as conn:
+    with get_connection() as conn:
+        if request.method == 'POST':
+            form_values = request.form.to_dict()
+            data = (form_values['name'],
+                    form_values["sum"],
+                    form_values["date"],
+                    form_values['currency'],
+                    form_values["category"],
+                    )
             add_new_expence(conn, data=data)
-    return render_template('expenses.html')
+        categories = get_categories(conn)
+        currencies = get_currencies(conn)
+        expenses = get_expenses(conn)
+    return render_template('expenses.html', expenses=expenses, categories=categories, currencies=currencies)
 
 
 @app.route('/categories', methods=["GET", "POST"])

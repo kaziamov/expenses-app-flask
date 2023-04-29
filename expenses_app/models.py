@@ -35,8 +35,8 @@ def add_currency(conn, name):
 
 def add_new_expence(conn, data):
     with conn.cursor() as cursor:
-        cursor.execute("""INSERT INTO expenses (name, sum, date, currency, category, is_income)
-                       VALUES (%s, %s, %s, %s, %s, %s) ;""", data)
+        cursor.execute("""INSERT INTO expenses (name, sum, date, currency, category)
+                       VALUES (%s, %s, %s, %s, %s) ;""", data)
 
 
 def get_categories(conn):
@@ -48,4 +48,10 @@ def get_categories(conn):
 def get_currencies(conn):
     with conn.cursor() as cursor:
         cursor.execute("""SELECT * FROM currencies""")
+        return cursor.fetchall()
+
+
+def get_expenses(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("""SELECT * FROM expenses""")
         return cursor.fetchall()
