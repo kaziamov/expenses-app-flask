@@ -2,7 +2,11 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, flash, redirect, url_for
 
-from expenses_app.models import add_currency, add_category, add_new_expence, get_categories, get_currencies
+from expenses_app.models import (add_currency,
+                                 add_category,
+                                 add_new_expence,
+                                 get_categories,
+                                 get_currencies)
 from expenses_app.db_connect import get_connection
 
 
@@ -42,7 +46,9 @@ def categories():
             add_category(conn, new_category)
             flash('Категория добавлена', 'success')
         categories = get_categories(conn)
-    return render_template("categories.html", categories=categories, new_category=new_category)
+    return render_template("categories.html",
+                           categories=categories,
+                           new_category=new_category)
 
 
 @app.route('/currencies', methods=["GET", "POST"])
@@ -55,9 +61,9 @@ def currencies():
             add_currency(conn, new_currency)
             flash('Валюта добавлена', 'success')
         currencies = get_currencies(conn)
-    return render_template("currencies.html", currencies=currencies, new_currency=new_currency)
-
-
+    return render_template("currencies.html",
+                           currencies=currencies,
+                           new_currency=new_currency)
 
 
 if __name__ == "__main__":

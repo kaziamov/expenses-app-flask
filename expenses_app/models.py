@@ -38,6 +38,7 @@ def add_new_expence(conn, data):
         cursor.execute("""INSERT INTO expenses (name, sum, date, currency, category, is_income)
                        VALUES (%s, %s, %s, %s, %s, %s) ;""", data)
 
+
 def get_categories(conn):
     with conn.cursor() as cursor:
         cursor.execute("""SELECT * FROM categories""")
