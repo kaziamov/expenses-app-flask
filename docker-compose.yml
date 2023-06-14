@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  app:
+    image: python:3.11.2
+    build:
+      context: .
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    ports:
+      - ${PORT}:${PORT}
+    command: bash -c "cd app && pip install poetry && poetry install && make start"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./database.sql/docker-entrypoint-initdb.d/001.sql
+    ports:
+      - ${PG_PORT}:${PG_PORT}
