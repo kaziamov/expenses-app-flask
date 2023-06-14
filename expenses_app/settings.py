@@ -3,13 +3,15 @@ import os
 from urllib.parse import urlparse
 
 
-env_path = os.path.join(os.path.dirname(__file__), '.env')
 dotenv.load_dotenv()
-parsed_url = urlparse(os.environ.get('DATABASE_URL'))
+DATABASE_URL = urlparse(os.getenv('DATABASE_URL'))
 
 
-DB_HOST = parsed_url.hostname
-DB_PORT = parsed_url.port
-DB_NAME = parsed_url.path[1:]
-DB_USER = parsed_url.username
-DB_PASS = parsed_url.password
+DB_HOST = DATABASE_URL.hostname
+DB_PORT = DATABASE_URL.port
+DB_NAME = DATABASE_URL.path[1:]
+DB_USER = DATABASE_URL.username
+DB_PASS = DATABASE_URL.password
+
+MAX_CONN = os.getenv('MAX_CONN', 2)
+MIN_CONN = os.getenv('MAX_CONN', 1)
