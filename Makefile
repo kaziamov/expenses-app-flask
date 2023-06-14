@@ -1,3 +1,4 @@
+include .env
 full-test:
 	poetry run pytest --show-capture=stdout --showlocals -vv
 light-test:
@@ -31,9 +32,11 @@ server:
 
 
 #  PROD
-PORT ?= 8000
 start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) expenses_app:app
+	poetry run gunicorn -w 5 -b 0.0.0.0:${PORT} expenses_app:app
 
 py:
 	poetry run python
+
+run-db:
+	docker-compose up --force-recreate
