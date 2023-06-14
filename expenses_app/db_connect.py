@@ -1,10 +1,11 @@
 import psycopg2
-from expenses_app.settings import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
+from .settings import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER, MAX_CONN, MIN_CONN
 from psycopg2 import pool
 from contextlib import contextmanager
 
 
 def create_connection(*args, **kwargs):
+    """Create connection for work with PostgresSQL"""
     return psycopg2.connect(host=DB_HOST,
                             port=DB_PORT,
                             user=DB_USER,
@@ -12,8 +13,8 @@ def create_connection(*args, **kwargs):
                             database=DB_NAME)
 
 
-def create_pool(min_conn=1, max_conn=5):
-    """Create connection for work with PostgresSQL"""
+def create_pool(min_conn=MIN_CONN, max_conn=MAX_CONN):
+    """Create pool of connections for work with PostgresSQL"""
     return pool.SimpleConnectionPool(minconn=min_conn,
                                      maxconn=max_conn,
                                      connection_factory=create_connection,
