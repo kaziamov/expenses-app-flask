@@ -11,11 +11,16 @@ New version on FastAPI [here](https://github.com/kaziamov/expenses-app)
 
 ## Install
 
-Create .env or rename .env_example for local usage.
-Write enviroment varables for deploy
+Create .env or rename .env_example for local usage
 
-Run with Docker
+### Run with Docker
 ```docker-compose up```
 
+### Run with poetry in local enviroment
+```make start```
+
+### Run only database
+```make run-db```
 
 ## Usage
+Open in browser url (like, 0.0.0.0:8000 and enjoy)
