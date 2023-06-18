@@ -1,4 +1,3 @@
-include .env
 full-test:
 	poetry run pytest --show-capture=stdout --showlocals -vv
 light-test:
@@ -31,9 +30,6 @@ server:
 	sudo service postgresql start
 
 
-#  PROD
-start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:${PORT} expenses_app:app
 
 py:
 	poetry run python
@@ -41,3 +37,12 @@ py:
 run-db:
 	docker-compose --env-file .env.dev config \
 	&& docker-compose -f docker-compose.db.yml up --force-recreate
+
+up:
+	docker-compose --env-file .env config \
+	&& docker-compose  up --force-recreate
+
+#  PROD
+
+start:
+	poetry run gunicorn --preload -w 5 -b 0.0.0.0:5000 expenses_app:app
