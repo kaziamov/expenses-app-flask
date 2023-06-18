@@ -1,11 +1,20 @@
-from flask import render_template, request, flash, redirect, url_for, Blueprint
-from expenses_app.models import (add_currency,
-                                 add_category,
-                                 add_new_expence,
-                                 get_categories,
-                                 get_currencies,
-                                 get_expenses)
-from expenses_app.db_connect import get_connection
+from flask import (
+    render_template,
+    request,
+    flash,
+    redirect,
+    url_for,
+    Blueprint
+
+)
+from expenses_app.crud import (
+    add_new_expence,
+    get_categories,
+    get_currencies,
+    get_expenses,
+)
+from .db_connect import get_connection
+from . import controllers
 
 
 main = Blueprint('main', __name__)
