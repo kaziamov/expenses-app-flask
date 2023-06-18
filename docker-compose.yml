@@ -11,6 +11,8 @@ services:
       - db
     ports:
       - ${PORT}:${PORT}
+    networks:
+      - backend
     command: bash -c "cd app && pip install poetry && poetry install && make start"
 
   db:
@@ -18,9 +20,16 @@ services:
     environment:
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
-      POSTGRES_DB: ${PG_DB}
+      POSTGRES_DB: ${PG_DATABASE}
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      - ./database.sql/docker-entrypoint-initdb.d/001.sql
+      - ./database.sql:/docker-entrypoint-initdb.d/001.sql
+    networks:
+      - backend
     ports:
       - ${PG_PORT}:${PG_PORT}
+
+
+networks:
+  backend:
+    driver: "bridge"
