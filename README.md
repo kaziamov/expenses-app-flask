@@ -4,6 +4,7 @@
 # Expenses App
 
 [Live Demo](https://expenses-app-zero.kaziamov.com/)
+
 New version on FastAPI [here](https://github.com/kaziamov/expenses-app)
 
 ## Features
