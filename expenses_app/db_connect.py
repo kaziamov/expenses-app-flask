@@ -6,7 +6,6 @@ from contextlib import contextmanager
 
 def create_connection(*args, **kwargs):
     """Create connection for work with PostgresSQL"""
-    print(DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER, MAX_CONN, MIN_CONN)
     return psycopg2.connect(host=DB_HOST,
                             port=DB_PORT,
                             user=DB_USER,
