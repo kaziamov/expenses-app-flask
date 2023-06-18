@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DATABASE}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./database.sql:/docker-entrypoint-initdb.d/001.sql
+    network_mode: "host"

@@ -39,4 +39,5 @@ py:
 	poetry run python
 
 run-db:
-	docker-compose up --force-recreate
+	docker-compose --env-file .env.dev config \
+	&& docker-compose -f docker-compose.db.yml up --force-recreate
