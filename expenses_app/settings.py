@@ -5,11 +5,11 @@ import os
 
 dotenv.load_dotenv()
 
-DB_NAME = os.getenv("PG_DATABASE", "postgres")
-DB_USER = os.getenv("PG_USER", "postgres")
-DB_PASS = os.getenv("PG_PASSWORD", "postgres")
-DB_HOST = str(os.getenv("PG_HOST", "0.0.0.0"))
-DB_PORT = int(os.getenv("PG_PORT", 5432))
+DB_NAME = os.getenv("PGDATABASE", "postgres")
+DB_USER = os.getenv("PGUSER", "postgres")
+DB_PASS = os.getenv("PGPASSWORD", "postgres")
+DB_HOST = str(os.getenv("PGHOST", "0.0.0.0"))
+DB_PORT = int(os.getenv("PGPORT", 5432))
 
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
