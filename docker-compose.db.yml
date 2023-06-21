@@ -10,4 +10,6 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
       - ./database.sql:/docker-entrypoint-initdb.d/001.sql
-    network_mode: "host"
+    # network_mode: "host"
+    ports:
+    - ${PGPORT}:5432
