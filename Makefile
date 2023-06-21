@@ -35,12 +35,10 @@ py:
 	poetry run python
 
 run-db:
-	docker-compose --env-file .env.dev config \
-	&& docker-compose -f docker-compose.db.yml up --force-recreate
+	docker-compose -f docker-compose.db.yml up --force-recreate
 
 up:
-	docker-compose --env-file .env config \
-	&& docker-compose  up --force-recreate
+	docker-compose   -f docker-compose.yml up --force-recreate
 
 #  PROD
 
