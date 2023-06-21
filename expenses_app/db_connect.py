@@ -6,23 +6,27 @@ from contextlib import contextmanager
 
 def create_connection(*args, **kwargs):
     """Create connection for work with PostgresSQL"""
-    return psycopg2.connect(host=DB_HOST,
-                            port=DB_PORT,
-                            user=DB_USER,
-                            password=DB_PASS,
-                            database=DB_NAME)
+    return psycopg2.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASS,
+        database=DB_NAME
+    )
 
 
 def create_pool():
     """Create pool of connections for work with PostgresSQL"""
-    return pool.SimpleConnectionPool(minconn=MIN_CONN,
-                                     maxconn=MAX_CONN,
-                                     connection_factory=create_connection,
-                                     host=DB_HOST,
-                                     port=DB_PORT,
-                                     user=DB_USER,
-                                     password=DB_PASS,
-                                     database=DB_NAME)
+    return pool.SimpleConnectionPool(
+        minconn=MIN_CONN,
+        maxconn=MAX_CONN,
+        connection_factory=create_connection,
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASS,
+        database=DB_NAME
+    )
 
 
 @contextmanager
