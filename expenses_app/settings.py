@@ -11,5 +11,5 @@ DB_PORT = os.getenv("PGPORT")
 
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
-MAX_CONN = os.getenv('MAX_CONN', 2)
-MIN_CONN = os.getenv('MAX_CONN', 1)
+MAX_CONN = int(os.getenv('MAX_CONN', 2))
+MIN_CONN = int(os.getenv('MAX_CONN', 1))
